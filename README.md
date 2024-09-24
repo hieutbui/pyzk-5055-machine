@@ -4,6 +4,8 @@
 
 The purpose of this repository is simple: If you have an attendance machine that has default connection port is 5xxx, it may work or will help you a bit for decoding the return bytes data.
 
+The original version of core zk comes from this: [pyzk](https://github.com/fananimi/pyzk)
+
 # API Usage
 
 Create the ZK object and you will be ready to call api.
