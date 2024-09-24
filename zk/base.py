@@ -139,6 +139,12 @@ class ZK(object):
     self.user_packet_size = 28 # default zk6
     self.end_live_capture = False
 
+  def __str__(self):
+    """
+    for debug
+    """
+    return "ZK %s://%s:%s" % ("tcp" if self.tcp else "udp", self.__address[0], self.__address[1])
+
   def __create_socket(self):
     if self.tcp:
       self.__sock = socket(AF_INET, SOCK_STREAM)
