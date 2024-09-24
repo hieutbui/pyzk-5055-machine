@@ -553,13 +553,13 @@ class ZK(object):
     if self.verbose: print("_read w/chunk %i bytes" % start)
     return b''.join(data), start
     
-  def get_attendance(self):
+  def get_attendance(self) -> list[Attendance]:
     """
     return attendance record
 
     :return: List of Attendance object
     """
-    attendances = []
+    attendances = [Attendance]
     first_line_length = 21
     middle_line_length = 22
     last_line_length = 5
