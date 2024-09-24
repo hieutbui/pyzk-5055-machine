@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 class ZKError(Exception):
-    pass
+  pass
 
 
 class ZKErrorConnection(ZKError):
-    pass
+  pass
 
 
 class ZKErrorResponse(ZKError):
-    pass
+  pass
 
 
 class ZKNetworkError(ZKError):
-    pass
+  pass
