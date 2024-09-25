@@ -1,6 +1,7 @@
 import codecs
 from socket import socket, AF_INET, SOCK_DGRAM, SOCK_STREAM, timeout
 from struct import unpack, pack
+from typing import Iterator, Optional
 
 from datetime import datetime
 from .exception import ZKErrorConnection, ZKErrorResponse, ZKNetworkError
@@ -734,9 +735,11 @@ class ZK(object):
     d = datetime(year, month, day, hour, minute, second)
     return d
   
-  def live_capture(self, new_timeout=10):
+  def live_capture(self, new_timeout=10) -> Iterator[Optional[LiveAttendance]]:
     """
     try live capture of events
+
+    :return: Iterator of LiveAttendance object or None
     """
     was_enabled = self.is_enabled
     users = self.get_users()
