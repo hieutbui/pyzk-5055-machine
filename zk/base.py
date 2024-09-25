@@ -572,13 +572,10 @@ class ZK(object):
 
     position += first_line_length
 
-    middle_lines = []
     while len(attendance_data) - position > last_line_length:
-      middle_lines.append(attendance_data[position:position + middle_line_length])
+      attendance_line = attendance_data[position:position + middle_line_length]
+      attendances.append(self.decodeAttendance(attendance_line))
       position += middle_line_length
-
-    for middle_line in middle_lines:
-      attendances.append(self.decodeAttendance(middle_line))
 
     return attendances
   
