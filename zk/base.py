@@ -90,13 +90,6 @@ class ZK_helper(object):
     self.client.close()
     return res
 
-  def test_udp(self):
-    """
-    test UDP connection
-    """
-    self.client = socket(AF_INET, SOCK_DGRAM)
-    self.client.settimeout(10)
-
 class ZK(object):
   """
   ZK main class
