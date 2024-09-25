@@ -671,32 +671,32 @@ class ZK(object):
     userdata = userdata[4:]
     if self.user_packet_size == 28:
       while len(userdata) >= 28:
-          uid, privilege, password, name, card, group_id, timezone, user_id = unpack('<HB5s8sIxBhI',userdata.ljust(28, b'\x00')[:28])
-          if uid > max_uid: max_uid = uid
-          password = (password.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
-          name = (name.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
-          group_id = str(group_id)
-          user_id = str(user_id)
-          #TODO: check card value and find in ver8
-          if not name:
-            name = "NN-%s" % user_id
-          user = User(uid, name, privilege, password, group_id, user_id, card)
-          users.append(user)
-          if self.verbose: print("[6]user:",uid, privilege, password, name, card, group_id, timezone, user_id)
-          userdata = userdata[28:]
+        uid, privilege, password, name, card, group_id, timezone, user_id = unpack('<HB5s8sIxBhI',userdata.ljust(28, b'\x00')[:28])
+        if uid > max_uid: max_uid = uid
+        password = (password.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
+        name = (name.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
+        group_id = str(group_id)
+        user_id = str(user_id)
+        #TODO: check card value and find in ver8
+        if not name:
+          name = "NN-%s" % user_id
+        user = User(uid, name, privilege, password, group_id, user_id, card)
+        users.append(user)
+        if self.verbose: print("[6]user:",uid, privilege, password, name, card, group_id, timezone, user_id)
+        userdata = userdata[28:]
     else:
       while len(userdata) >= 72:
-          uid, privilege, password, name, card, group_id, user_id = unpack('<HB8s24sIx7sx24s', userdata.ljust(72, b'\x00')[:72])
-          password = (password.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
-          name = (name.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
-          group_id = (group_id.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
-          user_id = (user_id.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
-          if uid > max_uid: max_uid = uid
-          if not name:
-            name = "NN-%s" % user_id
-          user = User(uid, name, privilege, password, group_id, user_id, card)
-          users.append(user)
-          userdata = userdata[72:]
+        uid, privilege, password, name, card, group_id, user_id = unpack('<HB8s24sIx7sx24s', userdata.ljust(72, b'\x00')[:72])
+        password = (password.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
+        name = (name.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
+        group_id = (group_id.split(b'\x00')[0]).decode(self.encoding, errors='ignore').strip()
+        user_id = (user_id.split(b'\x00')[0]).decode(self.encoding, errors='ignore')
+        if uid > max_uid: max_uid = uid
+        if not name:
+          name = "NN-%s" % user_id
+        user = User(uid, name, privilege, password, group_id, user_id, card)
+        users.append(user)
+        userdata = userdata[72:]
     max_uid += 1
     self.next_uid = max_uid
     self.next_user_id = str(max_uid)
@@ -746,7 +746,7 @@ class ZK(object):
     self.cancel_capture()
     # self.verify_user()
     if not self.is_enabled:
-        self.enable_device()
+      self.enable_device()
     if self.verbose: print ("start live_capture")
     self.reg_event(const.EF_ATTLOG)
     self.__sock.settimeout(new_timeout)
@@ -807,8 +807,8 @@ class ZK(object):
         if self.verbose: print ("time out")
         yield None # return to keep watching
       except (KeyboardInterrupt, SystemExit):
-          if self.verbose: print ("break")
-          break
+        if self.verbose: print ("break")
+        break
     if self.verbose: print ("exit gracefully")
     self.__sock.settimeout(self.__timeout)
     self.reg_event(0)
